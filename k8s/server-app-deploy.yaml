@@ -21,8 +21,8 @@ spec:
         envFrom:
         - configMapRef:
             name: server-side-configs
-        - secretRef:
-            name: server-side-secrets
+        # - secretRef:
+        #     name: server-side-secrets
 
 ---
 

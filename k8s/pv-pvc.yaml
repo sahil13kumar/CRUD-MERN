@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: crud-app-pv
+spec:
+ accessModes:
+ - ReadWriteMany
+ capacity:
+   storage: 1G
+ hostPath:
+   path: /tmp/todo-pv
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: crud-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1G
+  storageClassName: ""

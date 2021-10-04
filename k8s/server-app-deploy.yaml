@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crud-server-app-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: crud-server-app
+  template:
+    metadata:
+      labels:
+        app: crud-server-app
+    spec:
+      containers:
+      - image: sahil1999/server-app
+        name: server-app
+        ports:
+        - containerPort: 5000
+        imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: server-side-configs
+        - secretRef:
+            name: server-side-secrets
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: crud-backend-service
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: crud-server-app
+  type: NodePort

@@ -12,14 +12,14 @@ COPY ./src ./src
 
 ENV REACT_APP_baseAPIURL=http://localhost:5000/
 
-# RUN yarn build
+RUN npm run build
 
-# FROM nginx:latest
+FROM nginx:latest
 
-# LABEL maintainer=Aamir-Pinger
+LABEL maintainer=sahil1999
 
-# COPY --from=todo-app-build /client/build/ /usr/share/nginx/html
+COPY --from=crud-app /client/build/ /usr/share/nginx/html
 
-EXPOSE 3000
+EXPOSE 80
 
-CMD npm start
+#CMD npm start
